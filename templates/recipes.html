@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Рецепты</title>
+    {% block extra_head %}
+
+    {% endblock %}
+</head>
+<body>
+    {% block content %}
+    <form class="d-flex" role="search" method="get">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="query">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    {% for rec in recipes %}
+        <h1>{{rec.title}}</h1>
+        <img src="{% if rec.image %} {{rec.image.url}} {% else %} {% static 'imgs/img_img.png' %} {% endif %}" alt="">
+        <p>{{rec.description}}</p>
+        <p>{{rec.price}}</p>
+        <p>{{rec.created_at}}</p>
+        <p>{{rec.user}}</p>
+    {% endfor %}
+    {% endblock %}
+</body>
+</html>
